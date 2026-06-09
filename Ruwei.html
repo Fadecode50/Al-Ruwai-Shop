@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL Ruwai | Industrial Construction Marketplace</title>
+    <style>
+        :root {
+            --primary-color: #ff9900; /* Amazon-inspired industrial orange */
+            --dark-bg: #131921;
+            --light-bg: #eaeded;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--dark-bg);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        .search-container {
+            display: flex;
+            flex: 1;
+            margin: 0 20px;
+            max-width: 700px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+
+        .search-container button {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .nav-tools {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-item span {
+            display: block;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1350&q=80') center/cover;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        /* Fixed RTL Arabic Text Presentation */
+        .hero .tagline {
+            font-size: 22px;
+            margin-bottom: 25px;
+            direction: rtl;
+            unicode-bidi: embed;
+            color: #f0f0f0;
+        }
+
+        .hero-btn {
+            background-color: var(--primary-color);
+            color: #000;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        .hero-btn:hover {
+            background-color: #e08800;
+        }
+
+        /* Main Content Grid Settings */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Fixed heading clean styling - no blurs, plenty of crisp contrast spacing */
+        .section-title {
+            margin-bottom: 25px;
+            font-size: 26px;
+            color: #111;
+            font-weight: 700;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* Product Card */
+        .product-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #e2e2e2;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            min-height: 44px;
+            color: #111;
+        }
+
+        .product-spec {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .price-tier {
+            background-color: #f7f7f7;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #B12704;
+            margin-bottom: 15px;
+        }
+
+        .price span {
+            font-size: 12px;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .buy-btn {
+            background-color: #ffd814;
+            border: 1px solid #fcd200;
+            border-radius: 20px;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .buy-btn:hover {
+            background-color: #f7ca00;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: #ddd;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="#" class="logo">AL<span>Ruwai</span></a>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Search Industrial Pipes, Concrete Mixes, Rebar, Specifications...">
+                <button>Search</button>
+            </div>
+
+            <div class="nav-tools">
+                <a href="#" class="nav-item">
+                    <span>Hello, Sign In</span>
+                    <strong>Procurement Account</strong>
+                </a>
+                <a href="#" class="nav-item">
+                    <span>Returns</span>
+                    <strong>& Orders</strong>
+                </a>
+                <a href="#" class="nav-item" style="font-size: 16px;">
+                    🛒 <strong>Project Cart</strong>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>شركة أبناء عبدالله الرويعي للمقاولات العامة</h1>
+        <p class="tagline">بناء التميز والثقة 35 عامًا</p>
+        <a href="#marketplace" class="hero-btn">تصفح المخزون بالجملة</a>
+    </section>
+
+    <main id="marketplace">
+        <h2 class="section-title">الأكثر طلبًا</h2>
+        
+        <div class="product-grid">
+            
+            <!-- Existing Product 1 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://tse3.mm.bing.net/th/id/OIP.in6XQM3W_Vq7qNBO0pEOmgHaE8?rs=1&pid=ImgDetMain&o=7&rm=3" alt="High-Strength Concrete" class="product-img">
+                    <h3 class="product-title">أنابيب حديد عالية الجودة للتطبيقات الصناعية والإنشائية</h3>
+                    <p class="product-spec">حزمة من الأنابيب المعدنية (الفولاذية) المستديرة</p>
+                    <div class="price-tier">
+                         <strong>خصم على الكميات الكبيرة متوفر:</strong> أطلب 10 حزم بسعر 9.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁85.00 <span>/ حزمة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- Existing Product 2 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://www.ashdownreinforcing.com/wp-content/uploads/concrete-reinforcing-rod-sussex.jpg" alt="Industrial PVC Pipes" class="product-img">
+                    <h3 class="product-title">حديد تسليح عالي المقاومة لمشاريع البناء والخرسانة</h3>
+                    <p class="product-spec">الطول:5 متر-العرض:1.2 سنتيمتر</p>
+                    <div class="price-tier">
+                         <strong>Specs:</strong> مقاوم للضغط العالي والمواد الكيميائية والماء.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁142.50 <span>/ الحزمة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- Existing Product 3 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://media.zid.store/06d55734-3a68-4b8e-a6ab-3a26ea3535be/dd6f5d2b-ebd3-47a3-9e30-36945aa8bcc0.jpg" alt="Reinforcement Rebar" class="product-img">
+                    <h3 class="product-title">أسمنت بورتلاندي مقاوم للكبريتات عالي الجودة</h3>
+                    <p class="product-spec">وزن 50 كجم</p>
+                    <div class="price-tier">
+                        🏗️ <strong>وصف:</strong>.مثالي لأعمال الخرسانة الملامسة للتربة
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁50.00 <span>/الكيس</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- Existing Product 4 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.B6o2IXxbT1h3rV5G-Wah_QHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="HDPE Culvert Pipe" class="product-img">
+                    <h3 class="product-title">مصباح السقف ليد الفنار</h3>
+                    <p class="product-spec">المقاس:7 سنتيمتر • القدرة:7 واط</p>
+                    <div class="price-tier">
+                         <strong>الوصف:</strong> .ﻳﺘﻤﻴﺰ ﻫﺬا اﻟﻨﻮع ﺑﺸﺪة إﻧﺎرﺗﻪ اﻟﻌﺎﻟﻴﺔ
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁25.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- Product Card 5 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 5" class="product-img">
+                    <h3 class="product-title">اسم المنتج الخامس هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- Product Card 6 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 6" class="product-img">
+                    <h3 class="product-title">اسم المنتج السادس هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- Product Card 7 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 7" class="product-img">
+                    <h3 class="product-title">اسم المنتج السابع هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- Product Card 8 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 8" class="product-img">
+                    <h3 class="product-title">اسم المنتج الثامن هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+
+            <!-- NEW PRODUCT CARD 9 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 9" class="product-img">
+                    <h3 class="product-title">اسم المنتج الجديد التاسع هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- NEW PRODUCT CARD 10 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 10" class="product-img">
+                    <h3 class="product-title">اسم المنتج الجديد العاشر هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- NEW PRODUCT CARD 11 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 11" class="product-img">
+                    <h3 class="product-title">اسم المنتج الحادي عشر هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- NEW PRODUCT CARD 12 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 12" class="product-img">
+                    <h3 class="product-title">اسم المنتج الثاني عشر هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- NEW PRODUCT CARD 13 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 13" class="product-img">
+                    <h3 class="product-title">اسم المنتج الثالث عشر هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- NEW PRODUCT CARD 14 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 14" class="product-img">
+                    <h3 class="product-title">اسم المنتج الرابع عشر هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- NEW PRODUCT CARD 15 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 15" class="product-img">
+                    <h3 class="product-title">اسم المنتج الخامس عشر هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+            <!-- NEW PRODUCT CARD 16 -->
+            <div class="product-card">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Product 16" class="product-img">
+                    <h3 class="product-title">اسم المنتج السادس عشر هنا</h3>
+                    <p class="product-spec">المواصفات: الحجم، الوزن، أو المقاسات</p>
+                    <div class="price-tier">
+                         <strong>تفاصيل إضافية:</strong> اكتب هنا أي عروض أو تفاصيل أخرى.
+                    </div>
+                </div>
+                <div>
+                    <div class="price">⃁00.00 <span>/ الوحدة</span></div>
+                    <button class="buy-btn">أضف للعربة</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AL Ruwai Supply Co. All Rights Reserved. | <a href="#">Contractor Terms of Service</a> | <a href="#">Request Commercial Quote</a></p>
+    </footer>
+
+</body>
+</html>
